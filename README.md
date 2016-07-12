@@ -104,21 +104,20 @@ Since Sinatra only returns strings the templating engines become much more impor
 Handlebars is at the bottom of the page. However, we'll spend today working on another engine, ERB. 
 
 ERB stands for Embedded Ruby. It is the default templating engine for most Ruby frameworks so it's helpful to know it but many projects 
-will use another templating engine. Just like Handlebars we need to keep our
+will use another templating engine. Just like Handlebars we need to keep our templates in the ``views`` folder.
 
 Most of the text in an ERB file is not changed after processing the document. There are two exceptions based on the ``<%= %>`` and ``<% %>`` tags. 
 
 ### Printed Values
-To print a value in an ERB, use ``<%= %>``. Whatever the code inside the ``<% %>`` evaluates to will be included in the file. Typically 
-this will be variable or a single method call on 
+To print a value in an ERB, use ``<%= %>``. Whatever the code inside the ``<%= %>`` evaluates to will be included in the file. Typically 
+this will be variable or a single method call on an object.
 
 ### Non-printed Values
-Any Ruby code that we want to run but don't want to print on the screen, like for loops or other control structures. For example, here 
-is how you use a for loop.
+Any Ruby code that we want to run but don't want to print on the screen, like for loops or other control structures.
 
 Challenge: 
-Given an ``team_members`` of strings. Write an ERB template which wraps the ``team_list`` array in a ``ul`` tag and each team member in 
-a ``li`` tag
+Given an array of ``team_members`` of that are strings, write an ERB template which wraps the ``team_list`` array in a ``ul`` tag and 
+each team member in a ``li`` tag
 
 <details>
 ```ruby
@@ -130,7 +129,7 @@ a ``li`` tag
 ```
 </details>
 
-We can can use this template in our index route to clean things up a bit.
+We can can use this template in our index route to create a nice HTML document.
 
 What would be the code we would add in the ``views/index.erb`` file to display all the team members:
 <details>
@@ -168,7 +167,7 @@ Just like Handlebars we can remove most of the boilerplate out to its own file c
 </html>
 ```
 
-Let's add the layout to our file now
+Let's add the layout to our file project now.
 
 [Comment]: # (Likely break here)
 
@@ -191,13 +190,16 @@ If we're trying to decode JSON we'll need the following code:
 	request_body = JSON.parse(request.body.read)
 ```
 
-Let's try to understand how we can build out our team_member creation route. Let's first create a quick new route
+Let's try to understand how we can build out our team_member creation route. Let's first create a quick ``new`` route
 
+In our app we add:
 ```ruby
 	get '/team_members/new' do
 		erb :new
 	end
 ```
+
+And a view ``views/show.erb``:
 
 ```html
 <form action='/team_members' method='POST'>
@@ -241,7 +243,7 @@ Find the team member in the array and render that team member in HTML.
 
 What would the code look like?
 
-<details
+<details>
 ```ruby
 	get '/team_members/:id' do
 		@team_member = @@team_members[params['id'].to_i
@@ -259,8 +261,8 @@ In ``view/show.erb``.
 </details>
 
 Now our product manager has asked us about a new feature. We're thinking about adding a picture of each team member.
-However, we don't want the picture to appear all of the time we get individual team_member data, we only want to 
-get the picture if is requested. How can we do this? 
+However, we don't want the picture to appear all of the time we request individual team_member data, we only want to 
+get the picture if the user wants it. How can we do this? 
 
 <details>
 How about a query parameter?
@@ -308,7 +310,7 @@ If you would prefer to use the Handlebars templates, you can!
 Here is how to install and use Handelbars in a Sinatra app:
 
 1. Include ``tilt-handlebars`` in your Gemfile
-2. ``require 'sinatra/handlebars' at the top of your Siantra file
+2. ``require 'sinatra/handlebars'`` at the top of your Siantra file
 3. Use ``handlebars`` as a templating function 
 
 For more information check out the [tilt-handlebars](https://github.com/jimothyGator/tilt-handlebars) repo.
