@@ -1,0 +1,16 @@
+body {
+	color: #67C8FF;
+	background: black;
+} 
+
+h1 {
+	text-align: center;
+}
+
+img {
+	display: inline;
+}
+
+.btn-default {
+	color: #67C8FF;;
+}

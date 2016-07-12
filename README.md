@@ -167,7 +167,10 @@ Just like Handlebars we can remove most of the boilerplate out to its own file c
 </html>
 ```
 
-Let's add the layout to our file project now.
+In the starter code, we've added a bit fancier layout and some default CSS.
+
+Notice that we've included a ``public`` folder just like Express. If we want to serve static assets we just need to 
+add them to the public folder.
 
 [Comment]: # (Likely break here)
 
@@ -203,9 +206,15 @@ And a view ``views/show.erb``:
 
 ```html
 <form action='/team_members' method='POST'>
-	<input type="text" name="name" placeholder="Team Member Name" />
-	<input type="text" name="high5s" placeholder="Starting High 5s" />
-	<input type="submit" value="Create new team member." />
+	<div class="form-group">
+		<input type="text" name="name" placeholder="Team Member Name" class="form-control" />
+	</div>
+	<div class="form-group">	
+		<input type="text" name="high5s" placeholder="Starting High 5s" class="form-control"/>
+	</div>
+	<div class="form-group">	
+		<input type="submit" value="Create new team member." class="btn btn-default" />
+	</div>
 </form>
 ```
 
