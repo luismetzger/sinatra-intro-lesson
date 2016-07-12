@@ -24,8 +24,8 @@ Gemfile. The second is called the ``config.ru``. This file helps configure the R
 and provides the basics web server functionality. The final file is often called the Sinatra app and is very similar to an
 Express controller file. 
 
-Lets start with the Gemfile. The first run the command ``bundle init``. This creates the Gemfile. We'll install two Gems Sinatra 
-and rerun, the Ruby version of nodemon.
+Lets start with the Gemfile. First, run the command ``bundle init``. This creates the Gemfile. We'll install two Gems: ``Sinatra ``
+and ``rerun``, the Ruby version of nodemon.
 
 Here's our final Gemfile: 
 
@@ -42,7 +42,7 @@ gem 'rerun'
 Once you create the file, run the command ``bundle install`` or just ``bundle``.
 
 
-The ``config.ru`` is boilerplate. Here is file that
+The ``config.ru`` is mostly boilerplate. Here is some code for that file.
 
 ```ruby
 require 'rubygems'
@@ -53,7 +53,7 @@ require './high_five_tracker'
 run HighFiveTracker
 ```
 
-Finally our initial app is just two lines
+Finally our initial app, ```high_five_tracker.rb``` is just two lines
 
 ```ruby
 class HighFiveTracker < Sinatra::Base
@@ -66,7 +66,7 @@ The default Sinatra port is 9292. Lets visit http://localhost:9292.
 
 ## Sinatra Routes
 
-To create a route all we need to do is use the HTTP verb, the path we want to use, and a ``do ... end`` block.
+To create a route in our app all we need to do is use the HTTP verb, the path we want to use, and a ``do ... end`` block.
 
 ```ruby
 	get '/' do
@@ -87,7 +87,7 @@ Let's add some data and create a true index route.
 Does this code work?
 
 <details>
-Sinatra only displays strings if we have an object we want to display we need to explicitly call .to_s on the object.
+Sinatra only displays strings. If we have an object we want to display, we need to explicitly call .to_s on the object.
 
 ```ruby
 	@@team_members = [{name: "Fry", high5s: 3}, {name: "Professor", high5s: 1},{name: "Bender", high5s: -2}, {name: "Leela", high5s: 1001}]
@@ -100,11 +100,11 @@ Sinatra only displays strings if we have an object we want to display we need to
 
 ## Templating and ERB
 
-Since Sinatra only returns strings the templating engines become much more important. We can use Handlebars and directions to install 
-Handlebars is at the bottom of the page. However, we'll spend today working on another engine, ERB. 
+Since Sinatra only returns strings, the templating engines become much more important. One option is to keep using Handlebars, and directions to install 
+Handlebars are at the bottom of the page. However, we'll spend today working on another engine, ERB. 
 
-ERB stands for Embedded Ruby. It is the default templating engine for most Ruby frameworks so it's helpful to know it but many projects 
-will use another templating engine. Just like Handlebars we need to keep our templates in the ``views`` folder.
+ERB stands for Embedded Ruby. It is the default templating engine for most Ruby frameworks, so it's helpful to know it, but many projects 
+may use another templating engine. Just like Handlebars, we need to keep our templates in the ``views`` folder.
 
 Most of the text in an ERB file is not changed after processing the document. There are two exceptions based on the ``<%= %>`` and ``<% %>`` tags. 
 
