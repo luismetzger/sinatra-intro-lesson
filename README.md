@@ -77,7 +77,7 @@ To create a route in our app all we need to do is use the HTTP verb, the path we
 Let's add some data and create a true index route. 
 
 ```ruby
-	@@team_members = [{name: "Fry", high5s: 3}, {name: "Professor", high5s: 1},{name: "Bender", high5s: -2}, {name: "Leela", high5s: 1001}]
+	@@team_members = [{"name" => "Fry", "high5s" => 3}, {"name" => "Professor", "high5s" => 1},{"name" => "Bender", "high5s" => -2}, {"name" => "Leela", "high5s" => 1001}]
 
 	get '/' do
 		@@team_members
@@ -110,13 +110,13 @@ Most of the text in an ERB file is not changed after processing the document. Th
 
 ### Printed Values
 To print a value in an ERB, use ``<%= %>``. Whatever the code inside the ``<%= %>`` evaluates to will be included in the file. Typically 
-this will be variable or a single method call on an object.
+this will be a variable or a single method call on an object.
 
 ### Non-printed Values
-Any Ruby code that we want to run but don't want to print on the screen, like for loops or other control structures.
+Any Ruby code that we want to run but don't want to print on the screen, like for loops or other control structures, gets wrapped in ``<% %>`` tags.
 
 Challenge: 
-Given an array of ``team_members`` of that are strings, write an ERB template which wraps the ``team_list`` array in a ``ul`` tag and 
+Given an array of ``team_members`` that are strings, write an ERB template which wraps the ``team_list`` array in a ``ul`` tag and 
 each team member in a ``li`` tag
 
 <details>
@@ -131,7 +131,7 @@ each team member in a ``li`` tag
 
 We can can use this template in our index route to create a nice HTML document.
 
-What would be the code we would add in the ``views/index.erb`` file to display all the team members:
+What would be the code we would add in the ``views/index.erb`` file to display all the team members' names and high5s?
 <details>
 ```ruby
 	<ul>
@@ -142,7 +142,7 @@ What would be the code we would add in the ``views/index.erb`` file to display a
 ```	
 </details>
 
-In the index route we need to do two things, add data to the ``@team_list`` variable and tell Sinatra which ERB file to use:
+Next, we need to do two things in our ``index`` route: add data to the ``@team_members`` variable and tell Sinatra which ERB file to use:
 
 ```ruby
 	get '/team_members' do
@@ -152,7 +152,7 @@ In the index route we need to do two things, add data to the ``@team_list`` vari
 ```
 
 ### Layouts 
-Just like Handlebars we can remove most of the boilerplate out to its own file called ``views/layout.erb``. Here instead of 
+Just like Handlebars, we can remove most of the boilerplate out to its own file called ``views/layout.erb``. Here instead of 
 ``{{{body}}}`` we use ``<%= yield %>``. 
 
 ```ruby
@@ -173,8 +173,8 @@ Let's add the layout to our file project now.
 
 ## Request Body
 
-Just like Node, Sinatra can parse data coming from the request. However unlike Express, there isn't a default tool like body-parser
-to help us read the data. We'll need to work with lower level request data.
+Just like Node, Sinatra can parse data coming from a request. However, unlike Express, there isn't a default tool like body-parser
+to help us read the data. We'll need to work with lower-level request data.
 
 If we're trying to decode form data, we need to use the following code:
 ```ruby
@@ -199,7 +199,7 @@ In our app we add:
 	end
 ```
 
-And a view ``views/show.erb``:
+And a view ``views/new.erb``:
 
 ```html
 <form action='/team_members' method='POST'>
